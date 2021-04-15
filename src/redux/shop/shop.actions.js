@@ -1,7 +1,5 @@
 import ShopActionTypes from './shop.types';
 
-import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
-
 export const fetchCollectionsStart = () => ({
     type: ShopActionTypes.FETCH_COLLECTIONS_START,
 });
@@ -16,6 +14,7 @@ export const fetchCollectionsFailure = errorMessage => ({
     payload: errorMessage
 });
 
+/* no longer needed since using saga
 export const fetchCollectionsStartAsync = () => {
     return dispatch => {
         const collectionRef = firestore.collection('collections');
@@ -30,7 +29,7 @@ export const fetchCollectionsStartAsync = () => {
         .catch(error => dispatch(fetchCollectionsFailure(error.message)));
 
         
-        /*
+        /*8888
         // returns a very overly nested collections value
         fetch(
             'https://firestore.googleapis.com/v1/projects/crwn-clothing-db-6e9f6/databases/(default)/documents/collections'
@@ -52,6 +51,7 @@ export const fetchCollectionsStartAsync = () => {
             updateCollections(collectionsMap);
             this.setState({ loading: false });
         });
-        */
+        *8888/
     }
 }
+*/
