@@ -22,7 +22,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     const snapShot = await userRef.get();
 
     if(!snapShot.exists){
-        const { displayName, email } = userAuth;
+        const { email } = userAuth;
+        const { displayName } = additionalData;
         const createdAt = new Date();
 
         try {
@@ -72,6 +73,15 @@ export const convertCollectionsSnapshotToMap = (collections) => {
         accumulator[collection.title.toLowerCase()] = collection;
         return accumulator;
     } , {});
+};
+
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = auth.onAuthStateChanged(userAuth => {
+            unsubscribe();
+            resolve(userAuth);
+        }, reject);
+    });
 };
 
 export const auth = firebase.auth();
